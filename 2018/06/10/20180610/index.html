@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -206,7 +210,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p><img src="https://upload-images.jianshu.io/upload_images/7289530-749848377d5565e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="javascript.jpg"><br>工作处于实习阶段，趁着现在还有点空闲时间，又忍不住掏出床头的《JavaScript高级程序设计》，重新温习了一遍。<br>在串讲作用域和作用域链之前，先梳理清楚几个重要概念。</p>
+              <p><img src="/blog/img/20180610/1.jpg" srcset="/blog/img/loading.gif" alt="javascript.jpg"><br>工作处于实习阶段，趁着现在还有点空闲时间，又忍不住掏出床头的《JavaScript高级程序设计》，重新温习了一遍。<br>在串讲作用域和作用域链之前，先梳理清楚几个重要概念。</p>
 <h2 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h2><p>执行环境定义了变量或函数有权访问的其他数据，决定了他们各自的行为。每个执行环境都有与其相关的<strong>变量对象</strong>。在web浏览器中，全局的执行环境是window，因此全局变量和函数都是作为window对象的属性和方法创建的。</p>
 <h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>环境中定义的变量和函数都保存在变量对象中，解析器在处理数据的时候会在后台使用它。（注：在函数的执行环境中，变量对象称为<strong>活动对象</strong>）<br>####环境栈<br>每个函数都有自己的执行环境，当执行流进入一个函数时，函数的执行环境被压入环境栈中，当函数执行完毕，函数从执行栈中弹出，将控制权返回给之前的执行环境。</p>
 <p>弄清楚了以上概念，看代码示例。</p>
@@ -220,9 +224,9 @@
     getFurniture();
 &#125;
 employeeHouse();</code></pre>
-<p>执行该代码，首先压入栈底的是全局执行环境window，全局执行环境中的变量对象上有变量leader和函数employeeHouse()。当执行employeeHouse()，执行流进入函数内部的时候，employeeHouse()的执行环境压入环境栈。代码继续执行，当执行getFurniture()函数的时候，其执行环境继续压入环境栈。整个流程大致如下图所示。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-f8913360421a1632.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="环境栈变化图.png"><br>当getFurniture()函数执行结束之后，getFurniture()函数的执行环境从环境栈中弹出，紧接着，employeeHouse()函数的执行环境从环境栈中弹出，当我们关闭网页或者浏览器时，全局执行环境自动销毁。</p>
+<p>执行该代码，首先压入栈底的是全局执行环境window，全局执行环境中的变量对象上有变量leader和函数employeeHouse()。当执行employeeHouse()，执行流进入函数内部的时候，employeeHouse()的执行环境压入环境栈。代码继续执行，当执行getFurniture()函数的时候，其执行环境继续压入环境栈。整个流程大致如下图所示。<br><img src="/blog/img/20180610/2.png" srcset="/blog/img/loading.gif" alt="环境栈变化图.png"><br>当getFurniture()函数执行结束之后，getFurniture()函数的执行环境从环境栈中弹出，紧接着，employeeHouse()函数的执行环境从环境栈中弹出，当我们关闭网页或者浏览器时，全局执行环境自动销毁。</p>
 <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>在JavaScript中是没有块级作用域的。作用域只有全局作用域和局部作用域（函数的执行环境）之分。也许是为了弥补JavaScript这一设计缺陷，在ES6中引入了<strong>let</strong>。<br>####作用域链<br>在了解作用域链之前，我们不妨设想作用域链的用途是什么？如果没有作用域链，结果会是怎样？如果没有作用链，就相当于缺少了一套访问变量和函数的规则，没有了这套规则的约束，就不能明确变量和函数的作用范围，说白了就会乱套。因此，作用域链的用途，<strong>是保证对执行环境有权访问的所有变量和函数的有序访问。</strong>作用域链的制定的规则就是<strong>内部环境可以通过作用域链访问所有外部环境，但是外部环境不能访问内部环境中的任何变量和函数。</strong>作用域链的搜所过程是：<strong>从作用域链的前端开始，向上逐级查询与给定名字匹配的标识符。如果找到了，搜索过程停止，否则继续沿着作用域链向上搜索，一直追溯到全局执行环境中的变量对象为止。</strong><br>当代码在一个环境中执行时，会创建变量对象的一个作用域链。<strong>作用域链的前端</strong>始终是当前执行的代码所在环境的变量对象。<strong>作用域链的末端</strong>始终是全局执行环境的变量对象。</p>
-<p>好了好了，重点来了。为了方便记忆，我们把作用域链看作是一串烧烤。（夜晚写这个，肚子有点饿了）假定这串烧烤是羊肉串，那么穿在这竹签上的羊肉便是<strong>变量对象</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-411dc77c563aa9b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="烤肉串类比图.png"></p>
+<p>好了好了，重点来了。为了方便记忆，我们把作用域链看作是一串烧烤。（夜晚写这个，肚子有点饿了）假定这串烧烤是羊肉串，那么穿在这竹签上的羊肉便是<strong>变量对象</strong>。<br><img src="/blog/img/20180610/3.png" srcset="/blog/img/loading.gif" alt="烤肉串类比图.png"></p>
 <p>以最开始的代码段为例，当代码执行getFurniture()函数，执行流进入getFurniture()函数内部的时候，可以知道，当前执行的代码所在环境是getFurniture()的执行环境。这时候，可以想象服务员递给你一串“羊肉串”，羊肉串的最顶端就是getFurniture()执行环境的变量对象。</p>
 <p>好了，作用域和作用域链的介绍先告一段落，后续会有补充，喜欢的朋友点个赞吧~一起学习，一起进步！</p>
 

@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -206,7 +210,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>在使用 GitHub、Coding 等 Git 服务的时候，经常需要配置 SSH key，以便于进行 Git 操作时候的身份认证，在这里记录和总结下配置的过程。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-fa09a404696320d3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" srcset="/blog/public/img/loading.gif" alt="ssh.jpg"></p>
+              <p>在使用 GitHub、Coding 等 Git 服务的时候，经常需要配置 SSH key，以便于进行 Git 操作时候的身份认证，在这里记录和总结下配置的过程。<br><img src="/blog/img/20180823/1.png" srcset="/blog/img/loading.gif" alt="ssh.jpg"></p>
 <h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p><strong>Secure Shell（缩写为 SSH）</strong>即“安全外壳协议”，是一项创建在应用层和传输层基础上的安全协议，为计算机上的 Shell（壳层）提供安全的传输和使用环境。</p>
 <p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质都是不安全的，因为它们在网络上使用明文传送数据、用户账号和用户口令，很容易受到中间人攻击方式的攻击。而 SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。其优点如下：</p>
 <ul>
@@ -228,10 +232,10 @@ git<span class="hljs-built_in"> config </span>--global user.email <span class="h
 <span class="hljs-keyword">ls</span></code></pre>
 <p>在目录下寻找一对以id_rsa命名的文件，其中一个带有<code>.pub</code>扩展名。<code>.pub</code>文件是公钥，另一个则是密钥。如果找不到这样的文件（或者根本没有<code>.ssh</code>目录），可以通过运行<code>ssh-keygen</code>来创建它们。</p>
 <pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">"shudz@qq.com"</span></code></pre>
-<p>首先ssh-keygen会确定密钥的存储位置（默认是<code>.ssh/id_rsa</code>），然后它会要求你输入两次密钥口令。如果不想在使用密钥时输入口令，将其留空直接回车即可。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-3eec37fa02f509b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" srcset="/blog/public/img/loading.gif" alt="rsa.png"></p>
+<p>首先ssh-keygen会确定密钥的存储位置（默认是<code>.ssh/id_rsa</code>），然后它会要求你输入两次密钥口令。如果不想在使用密钥时输入口令，将其留空直接回车即可。<br><img src="/blog/img/20180823/2.png" srcset="/blog/img/loading.gif" alt="rsa.png"></p>
 <p>此时，可以在用户目录找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是 SSH Key 的密钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。</p>
 <h3 id="添加-SSH-key-到-GitHub-账户"><a href="#添加-SSH-key-到-GitHub-账户" class="headerlink" title="添加 SSH key 到 GitHub 账户"></a>添加 SSH key 到 GitHub 账户</h3><p>登陆 GitHub，打开 “Account Setting” ，在设置边栏选择 “SSH and GPG keys” 选项，点击 “New SSH key” 按钮，填写任意 Title，在 Key 文本框粘贴<code>id_rsa.pub</code>文件的内容：</p>
-<p>点击 “Add Key” ，然后输入确认密码添加完成，就可以看到已经添加的 Key。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-d151ef193a8679c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" srcset="/blog/public/img/loading.gif" alt="github.png"></p>
+<p>点击 “Add Key” ，然后输入确认密码添加完成，就可以看到已经添加的 Key。<br><img src="/blog/img/20180823/3.png" srcset="/blog/img/loading.gif" alt="github.png"></p>
 <h3 id="测试-SSH-连接"><a href="#测试-SSH-连接" class="headerlink" title="测试 SSH 连接"></a>测试 SSH 连接</h3><pre><code class="hljs nginx"><span class="hljs-attribute">ssh</span> -T git<span class="hljs-variable">@github</span>.com</code></pre>
 <p>看到提示是否连接的信息，键入yes回车，如果看到包含用户名的信息，就说明成功了。</p>
 <p>到这里，SSH就配置完成了，赶快去github尝试提交代码吧～</p>

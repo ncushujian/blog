@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -208,19 +212,19 @@
             <article class="markdown-body">
               <h2 id="代理技术如何实现"><a href="#代理技术如何实现" class="headerlink" title="代理技术如何实现"></a>代理技术如何实现</h2><p>一般实现代理技术的方式就是<strong>在服务器上安装代理服务软件</strong>，让其成为一个代理服务器，从而实现代理技术。<br>常用的代理技术分为<code>正向代理</code>、<code>反向代理</code>和<code>透明代理</code>。</p>
 <h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>一般情况下，如果没有特别说明，代理技术默认说的是正向代理技术。关于正向代理的概念如下：  </p>
-<p><code>正向代理</code>是一个位于客户端【用户A】和原始服务器(origin server)【服务器B】之间的服务器【代理服务器Z】，为了从原始服务器取得内容，用户A向代理服务器Z发送一个请求并指定目标(服务器B)，然后代理服务器Z向服务器B转交请求并将获得的内容返回给客户端。客户端需要设置正向代理服务器，<strong>当然前提是要知道正向代理服务器的IP地址，还有代理程序的端口，</strong>才能使用正向代理。如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/7289530-1303f274f5e7493a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="正向代理.png"></p>
+<p><code>正向代理</code>是一个位于客户端【用户A】和原始服务器(origin server)【服务器B】之间的服务器【代理服务器Z】，为了从原始服务器取得内容，用户A向代理服务器Z发送一个请求并指定目标(服务器B)，然后代理服务器Z向服务器B转交请求并将获得的内容返回给客户端。客户端需要设置正向代理服务器，<strong>当然前提是要知道正向代理服务器的IP地址，还有代理程序的端口，</strong>才能使用正向代理。如下图所示：<br><img src="/blog/img/20190629/1.png" srcset="/blog/img/loading.gif" alt="正向代理.png"></p>
 <p>从上面的概念中，我们看出，文中所谓的<code>正向代理</code>就是<strong>代理服务器替代访问方【用户A】去访问目标服务器【服务器B】</strong>。很好的体现了正向代理的应用，其中之一就是科学上网，当然还有前端常用的抓包工具<code>Whistle</code>。</p>
 <p><code>Whistle</code>其实就是将开发用的PC变为代理服务器，当移动端设备设置好代理用的PC的<code>IP</code>和<code>代理服务端口号</code>之后，移动端设备所有的请求和服务端响应的数据，都要经过<code>Whistle代理服务</code>，因此前端开发者们，可以在PC上观察接口的响应情况。</p>
-<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><code>反向代理</code>正好与正向代理相反，对于客户端而言代理服务器就像是原始服务器，并且客户端不需要进行任何特别的设置。客户端向反向代理的命名空间(name-space)中的内容发送普通请求，接着反向代理将判断向何处(原始服务器)转交请求，并将获得的内容返回给客户端。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-e3a9be75b22f0cf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="反向代理.png"><br><strong>那反向代理的作用是什么呢？主要有以下两个方面：</strong><br>1、保护和隐藏原始服务器；<br>2、负载均衡<br><img src="https://upload-images.jianshu.io/upload_images/7289530-b78c21faf0231421.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="负载均衡.png"></p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><code>反向代理</code>正好与正向代理相反，对于客户端而言代理服务器就像是原始服务器，并且客户端不需要进行任何特别的设置。客户端向反向代理的命名空间(name-space)中的内容发送普通请求，接着反向代理将判断向何处(原始服务器)转交请求，并将获得的内容返回给客户端。<br><img src="/blog/img/20190629/2.png" srcset="/blog/img/loading.gif" alt="反向代理.png"><br><strong>那反向代理的作用是什么呢？主要有以下两个方面：</strong><br>1、保护和隐藏原始服务器；<br>2、负载均衡<br><img src="/blog/img/20190629/3.png" srcset="/blog/img/loading.gif" alt="负载均衡.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、正向代理需要客户端进行配置（配置代理服务器的ip和端口），反向代理需要服务端进行配置；<br>2、正向代理，对于原始服务器来说，不知道请求的真正用户是谁；<br>3、反向代理，对于用户来说，不知道原始服务器到底隐藏在哪里。</p>
 <hr>
 **以上内容其实对一位前端开发来讲，应该已经够了，以下内容是属于拓展，可以适当了解**
 ## 什么是“肉鸡”？
 通过前面的内容，我们可以知道正向代理，代理服务器可以替用户发出请求，从而隐藏了真实用户的信息，“肉鸡”指的就是那些**完全被用户操控的代理服务器，达到了隐藏访问者行踪的目的**
-![“肉鸡”百度词条.png](https://upload-images.jianshu.io/upload_images/7289530-59511dc1776b6864.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![“肉鸡”百度词条.png](/blog/img/20190629/4.png)
 
 <h2 id="加速访问"><a href="#加速访问" class="headerlink" title="加速访问"></a>加速访问</h2><p>假设用户A到服务器B，经过R1路由器和R2路由器，而R1到R2路由器的链路是一个低带宽链路。而用户A到<code>代理服务器Z</code>，从<code>代理服务器Z</code>到服务器B都是高带宽链路。那么很显然就可以加速访问服务器B了。</p>
-<h2 id="Cache作用"><a href="#Cache作用" class="headerlink" title="Cache作用"></a>Cache作用</h2><p>Cache（缓存）技术和代理服务技术是紧密联系的（不光是正向代理，反向代理也使用了Cache（缓存）技术。<br>如果在用户A访问服务器B某数据J之前，已经有人通过代理服务器Z访问过服务器B上得数据J，那么代理服务器Z会把数据J保存一段时间，如果有人正好取该数据J，那么代理服务器Z不再访问服务器B，而把缓存的数据J直接发给用户A。<br>这一技术在Cache中术语就叫Cache命中。如果有更多的像用户A的用户来访问代理服务器Z，那么这些用户都可以直接从代理服务器Z中取得数据J，而不用千里迢迢的去服务器B下载数据。<br><code>反向代理服务器</code>像正向代理服务器一样拥有Cache的作用，它可以缓存原始资源服务器B的资源，而不是每次都要向原始资源服务器B请求数据，特别是一些静态的数据，比如图片和文件，如果这些反向代理服务器能够做到和用户X来自同一个网络，那么用户X访问反向代理服务器X，就会得到很高质量的速度。<br><strong>这正是CDN技术的核心。</strong><br><img src="https://upload-images.jianshu.io/upload_images/7289530-5bd6566252c8b7c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="反向代理.png"></p>
+<h2 id="Cache作用"><a href="#Cache作用" class="headerlink" title="Cache作用"></a>Cache作用</h2><p>Cache（缓存）技术和代理服务技术是紧密联系的（不光是正向代理，反向代理也使用了Cache（缓存）技术。<br>如果在用户A访问服务器B某数据J之前，已经有人通过代理服务器Z访问过服务器B上得数据J，那么代理服务器Z会把数据J保存一段时间，如果有人正好取该数据J，那么代理服务器Z不再访问服务器B，而把缓存的数据J直接发给用户A。<br>这一技术在Cache中术语就叫Cache命中。如果有更多的像用户A的用户来访问代理服务器Z，那么这些用户都可以直接从代理服务器Z中取得数据J，而不用千里迢迢的去服务器B下载数据。<br><code>反向代理服务器</code>像正向代理服务器一样拥有Cache的作用，它可以缓存原始资源服务器B的资源，而不是每次都要向原始资源服务器B请求数据，特别是一些静态的数据，比如图片和文件，如果这些反向代理服务器能够做到和用户X来自同一个网络，那么用户X访问反向代理服务器X，就会得到很高质量的速度。<br><strong>这正是CDN技术的核心。</strong><br><img src="/blog/img/20190629/5.png" srcset="/blog/img/loading.gif" alt="反向代理.png"></p>
 <p>本文参考来自：<a href="https://blog.51cto.com/z00w00/1031287" target="_blank" rel="noopener">https://blog.51cto.com/z00w00/1031287</a><br>有兴趣的朋友可以去阅读原文～</p>
 
             </article>

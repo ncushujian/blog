@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -206,7 +210,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>上班实习的第一天，接到任务，要求开发一个微信小程序。小程序名为【翼签到】，用作公司内部发布大会消息和报名签到。<br>接到设计稿，估摸了一下，发现页面比较多，还好导师给我安排一个小伙伴进行协作开发。他主要负责发布流程而我主要负责<strong>着陆流程</strong>、<strong>审批流程</strong>和<strong>后台接口</strong>的开发。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-607ff710b2c8a02f.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" srcset="/blog/public/img/loading.gif" alt="timg.jpeg"></p>
+              <p>上班实习的第一天，接到任务，要求开发一个微信小程序。小程序名为【翼签到】，用作公司内部发布大会消息和报名签到。<br>接到设计稿，估摸了一下，发现页面比较多，还好导师给我安排一个小伙伴进行协作开发。他主要负责发布流程而我主要负责<strong>着陆流程</strong>、<strong>审批流程</strong>和<strong>后台接口</strong>的开发。<br><img src="/blog/img/20180605/1.jpeg" srcset="/blog/img/loading.gif" alt="timg.jpeg"></p>
 <h2 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h2><p>开发微信小程序是一件很有意思的事情。原因有二：</p>
 <ul>
 <li>简洁易懂的中文文档</li>
@@ -221,7 +225,7 @@
 官方文档明确指出<strong><map>组件不能嵌套在<swiper>组件当中使用。</strong>上面的代码违反了这条规定。出现的结果就是：在微信开发者工具中的模拟器测试，四个<swiper-item>能够流畅切换，表现正常。但是，当在手机上进行测试的时候，便出现了<map>组件停留在原地，不会随着父元素的<swiper-item>滑动的问题。<br>对于这样的问题，目前的解决方案是：使用<image>组件替换<map>组件，也就是展示一张静态的假地图。当用户需要操作地图的时候，<image>组件隐藏，将真正需要展示<map>组件显示出来即可。<h3 id="4-微信小程序启动机制"><a href="#4-微信小程序启动机制" class="headerlink" title="4.微信小程序启动机制"></a>4.微信小程序启动机制</h3>微信小程序只有<strong>冷启动</strong>和<strong>热启动</strong>之分。当用户打开过某个小程序，然后在一定时间内（目前为5分钟）再次打开，只需将后台态的小程序切换到前台，这是热启动。冷启动指的是用户首次打开或小程序被微信主动销毁后再次打开的情况，此时小程序需要重新加载启动。<br>微信小程序被销毁的情况有两种：</li>
 </ul>
 <p>1.当小程序进入后台，客户端会维持一段时间的运行状态，超过一定时间后（目前是5分钟）会被微信主动销毁<br>2.当短时间内（5s）连续收到两次以上收到系统内存告警，会进行小程序的销毁</p>
-<h3 id="5-密切关注微信小程序API的变动"><a href="#5-密切关注微信小程序API的变动" class="headerlink" title="5.密切关注微信小程序API的变动"></a>5.密切关注微信小程序API的变动</h3><p>作为一个系统的开发者和维护者，要关注官方文档中API的变动，因为某些API的变动可能会影响到使用该API的模块功能，因此需要做出及时的调整。例如，在今年4月份的时候，微信小程序变动了获取用户信息的接口(wx.getUserInfo)，具体见下图：<br><img src="https://upload-images.jianshu.io/upload_images/7289530-e7edd44326f41041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="获取用户信息接口调整.png"><br>简单来说，此次更新，是微信小程序获取用户信息这一操作更加倾向于用户主动提交个人信息。如果程序开发者不及时更新维护的话，那么原先调用wx.getUserInfo这一接口，将会报错。<br>在这种情况下，拿【有赞服务指南小程序】举例，该小程序在获取用户头像的时候（用户信息的一部分），明显的修改为“点击获取头像”，指引用户主动点击提交个人信息以获取个人头像信息。就算用户出于安全考虑不点击，那么小程序也不会调用wx.getUserInfo接口，因此，也不会产生错误。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-6d56d5abf0ae9dab.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="有赞服务指南小程序.jpg"></p>
+<h3 id="5-密切关注微信小程序API的变动"><a href="#5-密切关注微信小程序API的变动" class="headerlink" title="5.密切关注微信小程序API的变动"></a>5.密切关注微信小程序API的变动</h3><p>作为一个系统的开发者和维护者，要关注官方文档中API的变动，因为某些API的变动可能会影响到使用该API的模块功能，因此需要做出及时的调整。例如，在今年4月份的时候，微信小程序变动了获取用户信息的接口(wx.getUserInfo)，具体见下图：<br><img src="/blog/img/20180605/2.png" srcset="/blog/img/loading.gif" alt="获取用户信息接口调整.png"><br>简单来说，此次更新，是微信小程序获取用户信息这一操作更加倾向于用户主动提交个人信息。如果程序开发者不及时更新维护的话，那么原先调用wx.getUserInfo这一接口，将会报错。<br>在这种情况下，拿【有赞服务指南小程序】举例，该小程序在获取用户头像的时候（用户信息的一部分），明显的修改为“点击获取头像”，指引用户主动点击提交个人信息以获取个人头像信息。就算用户出于安全考虑不点击，那么小程序也不会调用wx.getUserInfo接口，因此，也不会产生错误。<br><img src="/blog/img/20180605/3.jpg" srcset="/blog/img/loading.gif" alt="有赞服务指南小程序.jpg"></p>
 <h2 id="后台技术栈"><a href="#后台技术栈" class="headerlink" title="后台技术栈"></a>后台技术栈</h2><p>依照公司内部的技术栈体系，后台技术栈选用了Node+Express4.0+MySQL。作为一个已经有Koa框架开发经验的我来说，使用Express开发后台接口的难度并不高。整个开发周期，花费在前端开发的时间远比开发后台接口所花的时间多得多。</p>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>和我搭档的小伙伴，在发布流程开发至一半的时候，离职返校答辩去了，留下我孤零零的揽下整个小程序的开发。于是，在他编写的代码基础上，我继续对发布流程进行开发，让我有了不小的收获。</p>
 <p><strong>1.一个函数只做一件事情</strong><br>下面代码的封装了一个getConferenceList()方法，由其函数名可以知道这个函数的大概作用——获取大会列表。但是实际上，这个函数中做了太多的事情，除了获取大会列表之外，调用了showLoading()展示loading动画，调用了stopPullDownRefresh()取消下载刷新，调用了showModal()弹出模态框，最后还调用了setData()修改了数据层…<br>如此杂乱的函数，<strong>复用率</strong>和<strong>自由度</strong>都大打折扣！</p>

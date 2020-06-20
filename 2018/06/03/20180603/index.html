@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -242,7 +246,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"block"</span>&gt;</span>我是第二个BFC<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"block"</span>&gt;</span>我是第三个BFC<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>由于BFC内部元素的垂直方向的边距会发生重叠，因此第一个block和第二个block相距30px，并不是40px。因此，运行结果如下入所示。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-9cafca873d77bbee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo1.png"></p>
+<p>由于BFC内部元素的垂直方向的边距会发生重叠，因此第一个block和第二个block相距30px，并不是40px。因此，运行结果如下入所示。<br><img src="/blog/img/20180603/1.png" srcset="/blog/img/loading.gif" alt="BFC_demo1.png"></p>
 <p>（2） BFC的元素不会与浮动元素产生重叠</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
        * &#123;
@@ -262,7 +266,7 @@
    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>运行结果如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/7289530-41bc3d287ea30bda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo2.png"><br>可以发现，right类和left类发生了重叠，若业务要求我们right类和left类不能重叠，相互独立，这时候我们可以使用BFC的渲染规则，只需添加一行代码便可达到这一目的，对代码进行改造。</p>
+<p>运行结果如下图所示：<br><img src="/blog/img/20180603/2.png" srcset="/blog/img/loading.gif" alt="BFC_demo2.png"><br>可以发现，right类和left类发生了重叠，若业务要求我们right类和left类不能重叠，相互独立，这时候我们可以使用BFC的渲染规则，只需添加一行代码便可达到这一目的，对代码进行改造。</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
        * &#123;
            padding: 0;
@@ -283,7 +287,7 @@
    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>查看运行结果，果然达到了我们想要的效果。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-167826c6b8235a33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo3.png"></p>
+<p>查看运行结果，果然达到了我们想要的效果。<br><img src="/blog/img/20180603/3.png" srcset="/blog/img/loading.gif" alt="BFC_demo3.png"></p>
 <p>（3）计算BFC的元素的高度的时候，浮动元素也会参与计算<br>利用这条BFC的渲染规则，我们可以很好的利用其作清除浮动。老规矩，上代码。</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
       * &#123;
@@ -303,7 +307,7 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"children"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p><img src="https://upload-images.jianshu.io/upload_images/7289530-d30d8499ea2ca0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo4.png"><br>从运行结果可以看出，由于children类浮动脱离了文档流，因此没有把parent类的高度撑开，parent类高度为0，没有显示出来。因此我们可以利用BFC元素计算高度的时候，浮动元素也会参与计算这一BFC渲染规则，对其进行改造，同样是增添一行代码，改造后的代码如下。</p>
+<p><img src="/blog/img/20180603/4.png" srcset="/blog/img/loading.gif" alt="BFC_demo4.png"><br>从运行结果可以看出，由于children类浮动脱离了文档流，因此没有把parent类的高度撑开，parent类高度为0，没有显示出来。因此我们可以利用BFC元素计算高度的时候，浮动元素也会参与计算这一BFC渲染规则，对其进行改造，同样是增添一行代码，改造后的代码如下。</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
        * &#123;
            padding: 0;
@@ -324,7 +328,7 @@
    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"children"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p><img src="https://upload-images.jianshu.io/upload_images/7289530-765893b37cb4f283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo5.png"><br>给parent类创建了BFC之后，在计算parent类高度的时候，也会把浮动元素的高度计算在其中，这也算是清除浮动了吧。</p>
+<p><img src="/blog/img/20180603/5.png" srcset="/blog/img/loading.gif" alt="BFC_demo5.png"><br>给parent类创建了BFC之后，在计算parent类高度的时候，也会把浮动元素的高度计算在其中，这也算是清除浮动了吧。</p>
 <p>如果觉得本文对你有收获的朋友，请点个赞，接下来的日子我会继续更新更好的技术博客！谢谢~</p>
 
             </article>

@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -222,9 +226,9 @@
 <blockquote>
 <p>注意：Access-Control-Allow-Origin字段是html5新增的一项标准功能，因此 IE10以下版本的浏览器是不支持的，因此，如果要求兼容IE9或更低版本的ie浏览器，会导致使用此种方式的跨域请求以及传递Cookie的计划夭折</p>
 </blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/7289530-af99ffe492b809a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="origin.png"></p>
+<p><img src="/blog/img/20180309/1.png" srcset="/blog/img/loading.gif" alt="origin.png"></p>
 <h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>浏览器将CORS请求分为两类： <strong>简单请求</strong>和<strong>非简单请求</strong>。</p>
-<p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>例如，下面的前端代码向后台发送了一个非简单请求，因为它制定了’Content-type’: ‘application/json’<br><img src="http://upload-images.jianshu.io/upload_images/7289530-1937fc7aff49ccfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="code.png"></p>
+<p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>例如，下面的前端代码向后台发送了一个非简单请求，因为它制定了’Content-type’: ‘application/json’<br><img src="/blog/img/20180309/2.png" srcset="/blog/img/loading.gif" alt="code.png"></p>
 <p>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求。</p>
 <p>预检请求的请求方法是OPTIONS,请求的头信息包括两个特殊字段:</p>
 <ul>
@@ -235,7 +239,7 @@
 <ul>
 <li>Access-Control-Allow-Methods<br>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</li>
 <li>Access-Control-Allow-Headers<br>如果浏览器请求包括Access-Control-Request-Headers字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</li>
-<li>Access-Control-Max-Age<br>该字段可选，用来指定本次预检请求的有效期，单位为秒。在此期间，不用发出另一条预检请求。<br><img src="http://upload-images.jianshu.io/upload_images/7289530-0550812ac6766293.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="AccessControl.png"></li>
+<li>Access-Control-Max-Age<br>该字段可选，用来指定本次预检请求的有效期，单位为秒。在此期间，不用发出另一条预检请求。<br><img src="/blog/img/20180309/3.png" srcset="/blog/img/loading.gif" alt="AccessControl.png"></li>
 </ul>
 
             </article>

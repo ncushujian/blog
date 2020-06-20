@@ -45,6 +45,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/blog/custom/css/index.css">
+
+
 
   <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -206,7 +210,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="范示化"><a href="#范示化" class="headerlink" title="范示化"></a>范示化</h2><p>数据表示的方式有很多种，其中最重要的问题之一就是在多大程度上对数据进行范式化。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-5637294615090c45.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="mongoDB.jpg"></p>
+              <h2 id="范示化"><a href="#范示化" class="headerlink" title="范示化"></a>范示化</h2><p>数据表示的方式有很多种，其中最重要的问题之一就是在多大程度上对数据进行范式化。<br><img src="/blog/img/20180310/1.jpg" srcset="/blog/img/loading.gif" alt="mongoDB.jpg"></p>
 <p><strong>范式化（normalization）</strong>是将数据分散到多个不同的集合，不同集合之间可以相互引用数据。虽然很多文档可以引用某一块数据，但是这块数据只存储在一个集合中。所以，如果要修改这块数据，只需修改保存这块数据的那一个文档就行了。但是，MongoDB没有提供连接（join）工具，所以在不同集合之间执行连接查询需要进行多次查询。</p>
 <p><strong>反范式化（denormalization）</strong>与范式化相反：将每个文档所需的数据都嵌入在文档内部。每个文档都拥有自己的数据副本，而不是所有文档共同引用同一个数据副本。这意味着，如果信息发生了变化，那么所有相关文档都需要进行更新，但是在执行查询时，只需要一次查询，就可以得到所有数据。</p>
 <p><strong>决定何时采用范式化何时采用反范式化时比较困难的。范式化能够提高数据写入速度，反范式化能够提高数据读取速度。需要根据自己应用程序的使用场景进行权衡。</strong></p>
