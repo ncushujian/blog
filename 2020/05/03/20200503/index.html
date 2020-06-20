@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/blog/public/img/favicon.png">
-  <link rel="icon" type="image/png" href="/blog/public/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" type="image/png" href="/blog/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,7 +23,7 @@
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/blog/public/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
 
   
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
@@ -41,12 +41,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
 
-<link  rel="stylesheet" href="/blog/public/css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script  src="/blog/public/js/utils.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/blog/public/">&nbsp;<strong>ncushujian's space</strong>&nbsp;</a>
+       href="/blog/">&nbsp;<strong>ncushujian's space</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -72,7 +72,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/public/">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -84,7 +84,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/public/archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -96,7 +96,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/public/categories/">
+              <a class="nav-link" href="/blog/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -108,7 +108,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/public/tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -120,7 +120,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/public/about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -139,7 +139,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/blog/public/img/default.jpg') no-repeat center center;
+         style="background: url('/blog/img/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -300,7 +300,7 @@
 <li><p>下一步是激活。当 service worker 安装完成后，会接收到一个激活事件(activate event)。 <code>onactivate</code>主要用途是清理先前版本的service worker 脚本中使用的资源。</p>
 </li>
 <li><p>重新刷新页面，会检测sw.js有无变化。没变化，不会重新在浏览器注册一个新的service worker(install钩子不会执行)，还是用旧的；有变化，会重新注册一个sw。期间，install钩子会直接执行，但是activate和其他不会执行，所以一般在activate清空上个版本的service worker相关缓存，等待使用旧的sevice worker的页面都关闭后，再激活新的service worker（如果使用了skipWaiting函数即可直接跳过install阶段）。未激活的service worker谷歌显示如下：</p>
-<p><img src="/blog/public/img/20200503/image-20200527163404854.png" srcset="/blog/public/img/loading.gif" alt="image-20200527163404854"></p>
+<p><img src="/blog/img/20200503/image-20200527163404854.png" srcset="/blog/img/loading.gif" alt="image-20200527163404854"></p>
 <p>下次再打开页面的时候，同时触发install和activate钩子</p>
 </li>
 <li><p>Service Worker 现在可以控制页面了，但仅是在 <code>register()</code> 成功后的打开的页面。也就是说，页面起始于有或则没有 service worker ，且在页面的接下来生命周期内维持这个状态。所以，页面不得不重新加载以让 service worker 获得完全的控制。（在activate钩子里使用clients.claim可以立即接管页面）</p>
@@ -311,12 +311,12 @@
 <h3 id="5-3-域名"><a href="#5-3-域名" class="headerlink" title="5.3 域名"></a>5.3 域名</h3><p>只能在https和localhost里面使用service worker，本地测试的时候请使用localhost(127.0.0.1实测也行)，用其他ip都不行，’serviceWorker’ in navigator会返回false</p>
 <h3 id="5-4-不要更改service-worker文件名"><a href="#5-4-不要更改service-worker文件名" class="headerlink" title="5.4 不要更改service worker文件名"></a>5.4 不要更改service worker文件名</h3><p>启用离线访问的情况下，首页（index.html）会被sw(service worker)缓存。如果sw文件名称修改了，因为首页被缓存了，注册的sw文件路径还是旧的，所以根本不会启用新的sw（找不到sw文件并不会删除或更新sw）。</p>
 <h3 id="5-5-调试"><a href="#5-5-调试" class="headerlink" title="5.5 调试"></a>5.5 调试</h3><p>由于service worker独立存在，所以错误的service worker可能会导致页面不可访问等其他情况。可以先去application选项卡把service worker清除</p>
-<p><img src="/blog/public/img/20200503/image-20200527151840562.png" srcset="/blog/public/img/loading.gif" alt="image-20200527151840562"></p>
+<p><img src="/blog/img/20200503/image-20200527151840562.png" srcset="/blog/img/loading.gif" alt="image-20200527151840562"></p>
 <h2 id="6-各api兼容性"><a href="#6-各api兼容性" class="headerlink" title="6.各api兼容性"></a>6.各api兼容性</h2><p>和service worker配套使用的api支持情况和service worker本身不一致，支持情况如下</p>
-<h3 id="6-1-serviceWorker"><a href="#6-1-serviceWorker" class="headerlink" title="6.1 serviceWorker"></a>6.1 serviceWorker</h3><p><img src="/blog/public/img/20200503/image-20200528190447870.png" srcset="/blog/public/img/loading.gif" alt="image-20200528190447870">    </p>
+<h3 id="6-1-serviceWorker"><a href="#6-1-serviceWorker" class="headerlink" title="6.1 serviceWorker"></a>6.1 serviceWorker</h3><p><img src="/blog/img/20200503/image-20200528190447870.png" srcset="/blog/img/loading.gif" alt="image-20200528190447870">    </p>
 <h3 id="6-2-caches"><a href="#6-2-caches" class="headerlink" title="6.2 caches"></a>6.2 caches</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage" target="_blank" rel="noopener">caches对象mdn介绍</a>。有match、 has、open、delete和keys四个函数，都是返回promise。兼容如下图</p>
-<p><img src="/blog/public/img/20200503/image-20200527134243932.png" srcset="/blog/public/img/loading.gif" alt="image-20200527134243932"></p>
-<h3 id="6-3-fetch"><a href="#6-3-fetch" class="headerlink" title="6.3 fetch"></a>6.3 fetch</h3><p><img src="/blog/public/img/20200503/image-20200527144635398.png" srcset="/blog/public/img/loading.gif" alt="image-20200527144635398"></p>
+<p><img src="/blog/img/20200503/image-20200527134243932.png" srcset="/blog/img/loading.gif" alt="image-20200527134243932"></p>
+<h3 id="6-3-fetch"><a href="#6-3-fetch" class="headerlink" title="6.3 fetch"></a>6.3 fetch</h3><p><img src="/blog/img/20200503/image-20200527144635398.png" srcset="/blog/img/loading.gif" alt="image-20200527144635398"></p>
 <h3 id="6-4-结论"><a href="#6-4-结论" class="headerlink" title="6.4 结论"></a>6.4 结论</h3><p>直接service worker的就一定支持cache和fetch(2，3项功能不行)，所以用如下代码即可：</p>
 <pre><code class="hljs scilab"><span class="hljs-keyword">if</span> (<span class="hljs-string">'serviceWorker'</span> in navigator) &#123;
       console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'支持service worker'</span>)
@@ -334,12 +334,12 @@
     &#125;</code></pre>
 
 <h2 id="7-手机实测"><a href="#7-手机实测" class="headerlink" title="7.手机实测"></a>7.手机实测</h2><p>安卓app（x5）： 支持navigator.serviceWorker属性, 但是install钩子不执行，原因未明</p>
-<p>安卓app：<img src="/blog/public/img/20200503/image-20200601105517390.png" srcset="/blog/public/img/loading.gif" alt="image-20200601105517390"></p>
+<p>安卓app：<img src="/blog/img/20200503/image-20200601105517390.png" srcset="/blog/img/loading.gif" alt="image-20200601105517390"></p>
 <p>安卓自带浏览器： 正常。由于连手机无法正常查看浏览器相关cache。接口时间对比如下（http和https）：</p>
-<p><img src="/blog/public/img/20200503/image-20200531133132867.png" srcset="/blog/public/img/loading.gif" alt="image-20200531133132867"></p>
-<p><img src="/blog/public/img/20200503/image-20200531133427630.png" srcset="/blog/public/img/loading.gif" alt="image-20200531133427630"></p>
+<p><img src="/blog/img/20200503/image-20200531133132867.png" srcset="/blog/img/loading.gif" alt="image-20200531133132867"></p>
+<p><img src="/blog/img/20200503/image-20200531133427630.png" srcset="/blog/img/loading.gif" alt="image-20200531133427630"></p>
 <p>Ios safari：</p>
-<p><img src="/blog/public/img/20200503/image-20200531134344522.png" srcset="/blog/public/img/loading.gif" alt="image-20200531134333522"><br><img src="/blog/public/img/20200503/image-20200531134333522.png" srcset="/blog/public/img/loading.gif" alt="image-20200531134333522"></p>
+<p><img src="/blog/img/20200503/image-20200531134344522.png" srcset="/blog/img/loading.gif" alt="image-20200531134333522"><br><img src="/blog/img/20200503/image-20200531134333522.png" srcset="/blog/img/loading.gif" alt="image-20200531134333522"></p>
 <p>iOS app：不支持。</p>
 
             </article>
@@ -361,7 +361,7 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/blog/public/2019/11/19/20191119/">
+                      <a href="/blog/2019/11/19/20191119/">
                         <span class="hidden-mobile">不使用 brew，如何安装 zsh ？</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -448,20 +448,20 @@
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/blog/public/js/debouncer.js" ></script>
-<script  src="/blog/public/js/main.js" ></script>
+<script  src="/blog/js/debouncer.js" ></script>
+<script  src="/blog/js/main.js" ></script>
 
 <!-- Plugins -->
 
 
   
-    <script  src="/blog/public/js/lazyload.js" ></script>
+    <script  src="/blog/js/lazyload.js" ></script>
   
 
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/blog/public/js/clipboard-use.js" ></script>
+  <script  src="/blog/js/clipboard-use.js" ></script>
 
 
 
@@ -515,9 +515,9 @@
 
 
 
-  <script  src="/blog/public/js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
   <script>
-    var path = "/blog/public/local-search.xml";
+    var path = "/blog/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
       searchFunc(path, 'local-search-input', 'local-search-result');
