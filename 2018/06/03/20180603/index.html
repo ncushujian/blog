@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/public/img/favicon.png">
+  <link rel="icon" type="image/png" href="/blog/public/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="shujian">
+  <meta name="keywords" content="">
+  <title>BFC原理及其应用 - ncushujian</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/public/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/blog/public/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/blog/public/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/public/">&nbsp;<strong>ncushujian's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/public/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/public/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/public/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/public/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/public/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/blog/public/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                BFC原理及其应用
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-06-03 00:00">
+      2018年6月3日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      884 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="什么是BFC？"><a href="#什么是BFC？" class="headerlink" title="什么是BFC？"></a>什么是BFC？</h2><p>BFC即Block Formatting Context的缩写，中文翻译过来就是块级格式化上下文。</p>
+<h2 id="BFC的原理"><a href="#BFC的原理" class="headerlink" title="BFC的原理"></a>BFC的原理</h2><p>本质上就是BFC得渲染规则，总结起来有四点：</p>
+<ul>
+<li>属于同一个BFC的俩个相邻的元素的margin会发生重叠</li>
+<li>BFC的元素不会与浮动元素产生重叠</li>
+<li>BFC的元素是一个独立的容器，容器内的元素不会影响容器外部的元素，相反，容器外的元素也不会影响容器内的元素</li>
+<li>计算BFC的元素的高度的时候，浮动元素也会参与计算</li>
+</ul>
+<h2 id="如何创建BFC"><a href="#如何创建BFC" class="headerlink" title="如何创建BFC?"></a>如何创建BFC?</h2><ul>
+<li>float值不为none </li>
+<li>position为absolute或fixed </li>
+<li>display为inline-block，table-cell，table-caption，flex； </li>
+<li>overflow不为visible</li>
+</ul>
+<h2 id="BFC的使用场景"><a href="#BFC的使用场景" class="headerlink" title="BFC的使用场景"></a>BFC的使用场景</h2><p>BFC的使用场景，紧贴BFC的原理进行阐述。<br>（1） BFC的元素垂直方向的边距会发生重叠</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+        * &#123;
+            padding: 0;
+            margin: 0;
+        &#125;
+<span class="css">        <span class="hljs-selector-class">.container</span> &#123;</span>
+<span class="css">            <span class="hljs-comment">/* 创建BFC */</span></span>
+            overflow: hidden;
+        &#125;
+<span class="css">        <span class="hljs-selector-class">.block</span> &#123;</span>
+            height: 100px;
+            margin: 10px 0 30px 0;
+            background: greenyellow;
+
+        &#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"block"</span>&gt;</span>我是第一个BFC<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"block"</span>&gt;</span>我是第二个BFC<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"block"</span>&gt;</span>我是第三个BFC<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>由于BFC内部元素的垂直方向的边距会发生重叠，因此第一个block和第二个block相距30px，并不是40px。因此，运行结果如下入所示。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-9cafca873d77bbee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo1.png"></p>
+<p>（2） BFC的元素不会与浮动元素产生重叠</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+       * &#123;
+           padding: 0;
+           margin: 0;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.left</span> &#123;</span>
+           float: left;
+           width: 200px;
+           height: 400px;
+           background: yellowgreen;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.right</span> &#123;</span>
+           height: 500px;
+           background: violet;
+       &#125;
+   <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>运行结果如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/7289530-41bc3d287ea30bda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo2.png"><br>可以发现，right类和left类发生了重叠，若业务要求我们right类和left类不能重叠，相互独立，这时候我们可以使用BFC的渲染规则，只需添加一行代码便可达到这一目的，对代码进行改造。</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+       * &#123;
+           padding: 0;
+           margin: 0;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.left</span> &#123;</span>
+           float: left;
+           width: 200px;
+           height: 400px;
+           background: yellowgreen;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.right</span> &#123;</span>
+           height: 500px;
+           background: violet;
+<span class="css">           <span class="hljs-comment">/* 创建BFC */</span></span>
+           overflow: hidden;
+       &#125;
+   <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>查看运行结果，果然达到了我们想要的效果。<br><img src="https://upload-images.jianshu.io/upload_images/7289530-167826c6b8235a33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo3.png"></p>
+<p>（3）计算BFC的元素的高度的时候，浮动元素也会参与计算<br>利用这条BFC的渲染规则，我们可以很好的利用其作清除浮动。老规矩，上代码。</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+      * &#123;
+          padding: 0;
+          margin: 0;
+      &#125;
+<span class="css">      <span class="hljs-selector-class">.parent</span> &#123;</span>
+          background: red;
+      &#125;
+<span class="css">      <span class="hljs-selector-class">.children</span> &#123;</span>
+          float: left;
+          height: 300px;
+          width: 400px;
+          background: springgreen;
+      &#125;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"children"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/7289530-d30d8499ea2ca0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo4.png"><br>从运行结果可以看出，由于children类浮动脱离了文档流，因此没有把parent类的高度撑开，parent类高度为0，没有显示出来。因此我们可以利用BFC元素计算高度的时候，浮动元素也会参与计算这一BFC渲染规则，对其进行改造，同样是增添一行代码，改造后的代码如下。</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+       * &#123;
+           padding: 0;
+           margin: 0;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.parent</span> &#123;</span>
+           background: red;
+<span class="css">           <span class="hljs-comment">/* 创建BFC */</span></span>
+           overflow: hidden;
+       &#125;
+<span class="css">       <span class="hljs-selector-class">.children</span> &#123;</span>
+           float: left;
+           height: 300px;
+           width: 400px;
+           background: springgreen;
+       &#125;
+   <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"children"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/7289530-765893b37cb4f283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/blog/public/img/loading.gif" alt="BFC_demo5.png"><br>给parent类创建了BFC之后，在计算parent类高度的时候，也会把浮动元素的高度计算在其中，这也算是清除浮动了吧。</p>
+<p>如果觉得本文对你有收获的朋友，请点个赞，接下来的日子我会继续更新更好的技术博客！谢谢~</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/public/2018/06/05/20180605/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【翼签到】微信小程序实战</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/blog/public/2018/03/10/20180310/">
+                        <span class="hidden-mobile">Mongodb数据库设计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/public/js/debouncer.js" ></script>
+<script  src="/blog/public/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/public/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/blog/public/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/blog/public/js/local-search.js" ></script>
+  <script>
+    var path = "/blog/public/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
